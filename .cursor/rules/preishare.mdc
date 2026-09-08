@@ -1,0 +1,60 @@
+---
+description: PREIshare project rules for AI coding agents
+alwaysApply: true
+---
+
+# PREIshare — agent rules
+
+## Project identity
+PREIshare is a real-estate intelligence product. This repository is a **single
+package at the repo root** (`package.json` name `preishare-org-repo`), not an
+`apps/` + `packages/` monorepo. Prefer existing files and patterns. Do not
+invent folders such as `apps/`, `packages/`, `backend/`, or `supabase/`.
+
+## Stack (do not substitute)
+- Language: TypeScript
+- App framework: TanStack Start + React (file routes in `src/routes/`)
+- Styling / bundler (verified in-repo): Tailwind CSS + Vite
+- Backend/data (course target): Supabase, PostgreSQL, pgvector — **not present
+  in this clone yet**; do not create those folders unless the human explicitly
+  tasks you to
+- Collaboration: Git + GitHub pull requests from a fork (do not push to
+  `EdTechForLearning/PREIShare-org-repo`)
+
+## Where to work (new contributors)
+- Safe first surfaces: `docs/onboarding/`, then `README.md` if the task is docs
+- Read before edit: `docs/onboarding/repo-map.md`,
+  `docs/onboarding/team-orientation-notes.md`, and this file
+- Verified app paths (read; do not treat as first-PR playground): `src/routes/`,
+  `src/components/`, `src/router.tsx`, `src/styles.css`
+- Avoid unless explicitly tasked: auth, `src/lib/user.ts`, billing, database
+  migrations, CI secrets, `package-lock.json`, `vite.config.ts`,
+  `src/routeTree.gen.ts` (generated), large dependency upgrades
+
+## How to change code
+- Prefer the smallest diff that completes the requested task
+- Match existing naming, file layout, and TypeScript style in neighboring files
+- Do not drive-by refactor unrelated modules
+- Do not add new libraries unless the human explicitly asks and justifies them
+- Do not invent npm scripts; only `dev`, `build`, `preview`, and
+  `generate-routes` exist in `package.json` today (no `test` script yet)
+
+## Secrets and safety
+- Never commit `.env`, API keys, tokens, or connection strings
+- Never print secrets into docs, rules, or chat logs
+- If a change needs configuration, document the variable *name* only (for
+  example `SUPABASE_URL`), not a real value
+- `.gitignore` already ignores `.env`
+
+## Agent workflow
+- Restate the goal and list files you will touch before editing
+- Implement in small steps; stop for verification after each logical unit
+- When unsure about PREIshare structure, consult `docs/onboarding/` and the
+  repo map rather than inventing paths
+- Loop: understand → plan → prompt → review → refine. Do not accept output
+  you cannot explain
+
+## Out of scope defaults
+- No rewriting the entire app "for best practices" unprompted
+- No changing product requirements silently—flag product questions to the human
+- No first PR that edits CI (none in this clone), lockfiles, or data layers
