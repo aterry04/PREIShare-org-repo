@@ -1,7 +1,6 @@
 # Pull request description — first PREIshare contribution
 
 **PR URL:**  https://github.com/EdTechForLearning/PREIShare-org-repo/pull/10 
-(Replace with the live `/pull/N` URL after the cross-fork PR is opened.)
 **Base repository:** EdTechForLearning/PREIShare-org-repo
 **Base branch:** main
 **Head repository (my fork):** aterry04/PREIShare-org-repo
