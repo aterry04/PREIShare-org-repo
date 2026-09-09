@@ -3,12 +3,12 @@
 **PR URL:**  https://github.com/EdTechForLearning/PREIShare-org-repo/pull/10 
 **Base repository:** EdTechForLearning/PREIShare-org-repo
 **Base branch:** main
-**Head repository (my fork):** aterry04/PREIShare-org-repo
+**Head repository:** aterry04/PREIShare-org-repo
 **Compare branch:** docs/first-contribution-aterry04
 **Author:** Alexis Terry / aterry04
 **Date opened:** 2026-09-08
 
-## Title (use this on GitHub)
+## Title 
 
 `docs: add onboarding contributor entry for aterry04`
 

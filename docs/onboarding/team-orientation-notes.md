@@ -6,21 +6,16 @@ Date: 2026-09-05
 ## 0. Team repository of record
 
 - **Team repo (upstream):** https://github.com/EdTechForLearning/PREIShare-org-repo
-- **My fork (created in Step 3):** https://github.com/aterry04/PREIShare-org-repo
+- **My fork :** https://github.com/aterry04/PREIShare-org-repo
 - I contribute by forking this repo and opening pull requests from my fork. I do not push to the team repo directly.
 
-## 1. Product mission (my words)
+## 1. Product mission 
 
-PREIshare is a real-estate intelligence product: it takes property and market
-information and turns it into something a person can actually use when deciding
-where to live, buy, or invest. The engineering team owns the shared web app
-that delivers that intelligence, so a careless edit on the shared line of work
-can break the product for everyone. My first job is to join that shipping loop
-safely—small change, reviewed, then merged—not to rebuild the product on day one.
+PREIshare is a product for real estate intelligence designed to help make home buying decisions simpler and better informed for customers. As a member of the engineering team my current mission is to safely join in on the team tech stack while adhering to best engineering practices so I don't overwrite any previous work.
 
 ## 2. Everyday collaboration → engineering workflow
 
-I already know this pattern from school or work: you do not overwrite the final
+This pattern is familiar to me from my coursework: you do not overwrite the final
 shared document. You make a draft, someone checks it, then it goes live.
 
 | Everyday picture | PREIshare engineering parallel |
@@ -33,12 +28,12 @@ shared document. You make a draft, someone checks it, then it goes live.
 
 ## 3. Actors in a pull-request workflow
 
-- **Contributor (me):** chooses a tiny, safe change; works on a separate branch; writes a clear description; answers review comments.
-- **Reviewer (teammate or simulated reviewer):** reads the diff for correctness, scope, and clarity before anything joins the shared project.
+- **Contributor:** chooses a tiny, safe change; works on a separate branch; writes a clear description; answers review comments.
+- **Reviewer:** reads the diff for correctness, scope, and clarity before anything joins the shared project.
 - **Shared repository:** the team’s source of truth on GitHub. Even if a tool would let me edit the default branch, the process is: branch → pull request → review → merge.
-- **Automation (later):** optional checks such as GitHub Actions may run on the PR. If a check fails, I treat it as a blocker, not background noise.
+- **Automation:** optional checks such as GitHub Actions may run on the PR. If a check fails, I treat it as a blocker, not background noise.
 
-## 4. First-PR definition of done (beginner-safe)
+## 4. First-PR definition of done 
 
 My first reviewed PR is done only when all of the following are true (a reviewer
 could answer yes or no to each item):

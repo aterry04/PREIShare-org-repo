@@ -3,7 +3,7 @@
 ## PR under review
 - Branch name: `docs/first-contribution-aterry04`
 - PR title (after any edits): `docs: add onboarding contributor entry for aterry04`
-- Link or local identifier: https://github.com/EdTechForLearning/PREIShare-org-repo/compare/main...aterry04:PREIShare-org-repo:docs/first-contribution-aterry04 (replace with `/pull/N` once the GitHub PR exists)
+- Link or local identifier: https://github.com/EdTechForLearning/PREIShare-org-repo/compare/main...aterry04:PREIShare-org-repo:docs/first-contribution-aterry04 
 - Related files: `CONTRIBUTORS.md`, `docs/onboarding/pr-description.md`, `docs/onboarding/first-contribution-notes.md`
 
 ## Simulated reviewer setup
@@ -58,14 +58,14 @@
 - **Action taken:** follow-up commit
 - **Evidence:** `CONTRIBUTORS.md` now ends with the visible sentence “Add a new row for yourself. Do not remove existing contributors.”
 
-## Follow-up commits (if any)
+## Follow-up commits
 | Commit message | Files touched | Addresses which comment # |
 | --- | --- | --- |
 | `docs: address simulated review on first-PR artifacts` | `CONTRIBUTORS.md`, `docs/onboarding/pr-description.md`, `docs/onboarding/review-response-notes.md` | 1, 2, 3, 5 |
 
 Comment 4 produced no commit (declined as out of contract).
 
-## PR description edits (if any)
+## PR description edits 
 - Sections changed (summary / test plan / risk / other): PR URL, What reviewers should look at, Test plan (exact paths), new Risk section, Checklist (honest ticks)
 - Before → after: URL was an HTML placeholder → compare-across-forks URL; test plan said “any onboarding markdown you intentionally staged” → named allow-list plus reject paths; all checkboxes empty → content checks ticked, GitHub push/cross-fork left for the clone
 - Why the edit helps a reviewer: they can find the branch, know which files must appear, and see which checks are already done vs still on the author

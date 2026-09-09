@@ -8,17 +8,17 @@
 ## One-sentence goal
 Add myself as a new contributor in `CONTRIBUTORS.md` and append one short pointer in `README.md` so the team can review a tiny first PR.
 
-## Why this surface (link to prior artifacts)
+## Why this surface 
 - From `docs/onboarding/repo-map.md`: Safe first-touch includes `docs/onboarding/` and `README.md` (docs-only; no runtime). Default first contribution should not touch `src/router.tsx`, lockfiles, or a not-found `supabase/` tree. `CONTRIBUTORS.md` is the course’s recommended beginner surface (it will be created next step; it is not in the starter tree today).
 - From `docs/onboarding/team-orientation-notes.md`: First-PR definition of done requires a small scoped change, work on a feature branch (not `main`), a written description, and a diff a teammate can review without a meeting. A contributors list is named as the right size.
 - From `docs/onboarding/ai-tooling-verification.md`: Tooling decision is **GO**. ST2 (never commit `.env`) and ST3 (scope first change to docs, smallest diff) passed. Implementation next may use the agent, but I will refuse any diff outside the files table below.
 
-## In scope (only these)
+## In scope
 1. Create `CONTRIBUTORS.md` at the repo root with my name, GitHub handle `@aterry04`, and a one-line role: "Onboarding engineer".
 2. Optional second touch (exactly one): append a short **Contributors** note at the end of `README.md` that links to `CONTRIBUTORS.md`. Do not rewrite install/dev instructions.
 3. Capture implementation notes later in `docs/onboarding/first-contribution-notes.md` (next step—not done here).
 
-## Out of scope (explicitly not this PR)
+## Out of scope (not this PR)
 - Auth, sessions, or environment secrets
 - Database schema, migrations, Supabase policies, or pgvector changes
 - Dependency upgrades or lockfile churn unrelated to the contribution
@@ -33,7 +33,7 @@ Add myself as a new contributor in `CONTRIBUTORS.md` and append one short pointe
 | README.md | edit (append only) | One short Contributors pointer; do not change `npm` instructions |
 | docs/onboarding/first-contribution-notes.md | create (next step) | Record what the agent did and what I verified |
 
-This planning step also saves `docs/onboarding/first-contribution-plan.md` (this file). It is not part of the product change; it is the contract for the next step.
+This planning step also saves `docs/onboarding/first-contribution-plan.md`. It is not part of the product change; it is the contract for the next step.
 
 ## Acceptance criteria
 - [ ] I am on feature branch `docs/first-contribution-aterry04` (not the default branch `main`).
@@ -42,7 +42,7 @@ This planning step also saves `docs/onboarding/first-contribution-plan.md` (this
 - [ ] No secrets, `.env` files, or generated build artifacts are included.
 - [ ] A teammate can review the diff in under 10 minutes without product-context deep dives.
 
-## Verification plan (how I will know it worked)
+## Verification plan 
 1. `git status` / `git branch --show-current` show I am on `docs/first-contribution-aterry04` with only expected files modified.
 2. Open `CONTRIBUTORS.md` and confirm my row/section renders as plain Markdown.
 3. Open `README.md` and confirm the new Contributors note is at the end and that `npm install` / `npm run dev` text is untouched. Skip running the dev server; this PR is docs-only.

@@ -11,7 +11,7 @@
 - Agent tool used: coding-agent (read the real tree of `aterry04/PREIShare-org-repo`; no application code was modified)
 - Mapper: Alexis Terry (@aterry04)
 
-## 1. Overview (5–8 sentences)
+## 1. Overview 
 
 PREIshare appears to be organized as: a **single package** at the repository root, not a monorepo with `apps/` and `packages/` folders. There is one `package.json` (`name`: `preishare-org-repo`); no workspace members were found.
 

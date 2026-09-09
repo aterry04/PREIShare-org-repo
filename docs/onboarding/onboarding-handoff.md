@@ -2,14 +2,14 @@
 
 **Author:** Alexis Terry (@aterry04)  
 **Date:** 2026-09-08  
-**Branch / PR:** `docs/first-contribution-aterry04` — compare URL (live `/pull/N` not recorded yet): https://github.com/EdTechForLearning/PREIShare-org-repo/compare/main...aterry04:PREIShare-org-repo:docs/first-contribution-aterry04  
+**Branch / PR:** `docs/first-contribution-aterry04` — compare URL : https://github.com/EdTechForLearning/PREIShare-org-repo/compare/main...aterry04:PREIShare-org-repo:docs/first-contribution-aterry04  
 **Audience:** mentor, future self, sprint lead
 
-## 1. Stakeholder summary (plain language)
+## 1. Stakeholder summary 
 
 I completed PREIshare engineering onboarding for Sprint 1 (dev environment and AI tooling). I forked the team repository, cloned my fork, wired up origin and upstream, verified Git on Windows, configured Cursor-style project rules and agent memory, mapped the repo well enough to choose a safe first contribution, and prepared a small docs-only pull request that follows the team’s Git and review habits. PREIshare remains a real-estate intelligence product; this work does not ship a product feature—it proves I can join the team workflow safely.
 
-**My three source-of-truth bullets (written before this draft):**
+**My three source-of-truth bullets:**
 1. **Done means:** a verified fork/clone with remotes, AI rules that passed a four-question smoke test, and a tiny contributors/README change on a named feature branch with a written review loop.
 2. **Open risk:** Node/npm versions and `npm run dev` were never recorded; some onboarding markdown landed on GitHub later than others; the live PR number is still TODO.
 3. **Do not redo next sprint:** fork, clone path, `origin`/`upstream`, Git identity, or rewriting `.cursor/rules/preishare.mdc` / `AGENTS.md` from zero.
@@ -20,7 +20,7 @@ I completed PREIshare engineering onboarding for Sprint 1 (dev environment and A
 - [x] First contribution implemented on feature branch `docs/first-contribution-aterry04` (`CONTRIBUTORS.md` + README pointer + notes)
 - [ ] PR opened with a live `/pull/N` URL — description and compare link exist; replace TODO when GitHub assigns a number
 
-## 2. Deliverables index (what exists and where)
+## 2. Deliverables index 
 
 | Artifact | Path | Why it matters |
 | --- | --- | --- |
@@ -39,12 +39,12 @@ I completed PREIshare engineering onboarding for Sprint 1 (dev environment and A
 
 ## 3. Environment and toolchain snapshot
 
-Copied from `docs/onboarding/setup-log.md` only (no invented versions):
+Copied from `docs/onboarding/setup-log.md` only :
 
 - OS: Windows (PowerShell); Git `2.55.0.windows.3`
 - Git user.name / user.email configured: **yes** (`Alexis Terry` / GitHub-tied email recorded in the setup log)
 - Node / package manager versions: **TODO** — not recorded in the setup log; do not assume a version
-- origin (my fork) URL: `https://github.com/aterry04/PREIShare-org-repo.git`
+- origin  URL: `https://github.com/aterry04/PREIShare-org-repo.git`
 - upstream (team repo) URL: https://github.com/EdTechForLearning/PREIShare-org-repo
 - Local clone path: `C:\users\act07\documents\projects\PREIShare-org-repo`
 - Install/build/test commands run and result: **not run this sprint** (docs-only first PR; `package.json` scripts exist: `dev`, `build`, `preview`, `generate-routes`; **no `test` script**)

@@ -29,7 +29,7 @@ user.email=alexisterry801@gmail.com
 
 Identity configured: PASS
 
-## 3. Clone (of MY fork)
+## 3. Clone 
 
 - Parent directory used: `C:\users\act07\documents\projects`
 - Clone command used: `git clone https://github.com/aterry04/PREIShare-org-repo.git`
@@ -48,7 +48,7 @@ Receiving objects: 100% (41/41), 49.76 KiB | 606.00 KiB/s, done.
 Resolving deltas: 100% (6/6), done.
 ```
 
-## 4. Remotes (run inside the repo)
+## 4. Remotes
 
 - `git remote add upstream https://github.com/EdTechForLearning/PREIShare-org-repo.git` run: PASS
 
@@ -89,7 +89,7 @@ main
 Default branch name: `main`
 Working tree clean after clone: PASS
 
-## 6. Auth notes (no secrets)
+## 6. Auth notes
 
 - Clone method: HTTPS
 - Auth method used (if prompted): none shown (public HTTPS clone completed without a credential prompt in the captured output)

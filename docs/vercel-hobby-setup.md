@@ -1,16 +1,16 @@
 # Vercel Hobby setup — PREIshare investor app
 
 **Date:** 2026-09-08
-**Vercel plan:** Hobby (free) — not Pro
+**Vercel plan:** Hobby 
 
-## URLs (the same ones you will reuse all semester)
+## URLs 
 
 | Item | Value |
 | --- | --- |
 | GitHub repository (you can push) | `https://github.com/aterry04/PREIShare-org-repo` |
-| Instructor collaborator | `thortek` added: invite sent (pending until they accept) |
+| Instructor collaborator | `thortek` added: invite sent (pending) |
 | Vercel Production URL | https://prei-share-org-repo-woad.vercel.app/ |
-| Preview URLs | Do **not** submit these to Canvas |
+| Preview URLs | Not for Canvas Submission |
 
 ## Hobby constraints I will keep
 
@@ -20,7 +20,7 @@
 - Secrets go in the Vercel dashboard later — never in git
 - Do not set `outputDirectory: "dist"` (this is SSR via TanStack Start + Nitro, not a static site)
 
-## Nitro (required before a working Production URL)
+## Nitro 
 
 `main` currently has `vite.config.ts` plugins `devtools()`, `tailwindcss()`, `tanstackStart()`, `viteReact()` — **no `nitro()`**. Without Nitro the Vercel build can pass while every page returns 404 (NOT_FOUND).
 
@@ -45,4 +45,4 @@ Do not add a `vercel.json` that points at `dist`.
 ## GitHub collaborator
 
 - Invite `thortek` on `https://github.com/aterry04/PREIShare-org-repo` → Settings → Collaborators
-- After they accept, change the table row above to `yes`
+
