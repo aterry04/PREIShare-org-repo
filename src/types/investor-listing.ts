@@ -8,11 +8,9 @@
 import type { Address } from "./address"
 import type { FinancialSummary } from "./financial-summary"
 import type { InvestorContact } from "./investor-contact"
+import type { OpenListingStatus } from "./listing-status"
 import type { Ownership } from "./ownership"
 import type { PropertyType } from "./property-type"
-
-/** At least one contact — used on published, under_offer, and sold. */
-type NonEmptyContacts = [InvestorContact, ...InvestorContact[]]
 
 /** Fields every investor listing has, regardless of status. */
 export interface InvestorListingBase {
@@ -47,11 +45,7 @@ export interface InvestorListingBase {
    */
   financials: FinancialSummary
 
-  /**
-   * People associated with this listing.
-   * Draft and archived may be empty; published, under_offer, and sold
-   * require at least one contact (narrowed on those union branches).
-   */
+  /** One or more people associated with this listing. */
   contacts: InvestorContact[]
 
   /**
@@ -72,25 +66,17 @@ export interface InvestorListingBase {
  * Discriminated union: TypeScript uses `status` to know which shape you have.
  * PREIshare’s closed deal is `sold` (not the tutorial sample `closed`).
  * `closedAt` is required only when status is `sold`.
- * Published, under-offer, and sold listings must include at least one contact.
  */
 export type InvestorListing =
   | (InvestorListingBase & {
-      status: "draft" | "archived"
+      status: OpenListingStatus
       /** Not used unless the listing is sold. */
       closedAt?: undefined
-    })
-  | (InvestorListingBase & {
-      status: "published" | "under_offer"
-      /** Not used unless the listing is sold. */
-      closedAt?: undefined
-      contacts: NonEmptyContacts
     })
   | (InvestorListingBase & {
       status: "sold"
       /** ISO-8601 datetime string — required when the listing is sold. */
       closedAt: string
-      contacts: NonEmptyContacts
     })
 
 export type ClosedInvestorListing = Extract<InvestorListing, { status: "sold" }>
