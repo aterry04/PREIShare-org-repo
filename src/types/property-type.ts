@@ -1,0 +1,11 @@
+/**
+ * Closed property categories from docs/domain/listing-field-inventory.md.
+ * Only these exact strings are allowed—no free text or alternate casing.
+ */
+export type PropertyType =
+  | "multifamily"
+  | "office"
+  | "retail"
+  | "industrial"
+  | "mixed_use"
+  | "land"

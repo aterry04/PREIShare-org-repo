@@ -1,5 +1,12 @@
 {
   "include": ["**/*.ts", "**/*.tsx"],
+
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/fixtures/invalid-listings.errors.ts"
+  ],
+
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",
