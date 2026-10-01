@@ -55,7 +55,7 @@ export function PortfolioTable({
       {holdings.length === 0 ? (
         <p className="empty-state m-0 mt-4 text-sm text-[var(--sea-ink)]">{emptyMessage}</p>
       ) : (
-        <div className="table-wrap mt-4 overflow-x-auto">
+        <div className="table-wrap dash-table-wrap mt-4">
           <table className="w-full border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-[var(--line)] text-[var(--sea-ink-soft)]">

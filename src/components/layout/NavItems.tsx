@@ -6,13 +6,17 @@ const linkClass =
 const inactiveClass = `${linkClass} text-[var(--sea-ink-soft)] hover:bg-[var(--chip-bg)] hover:text-[var(--sea-ink)]`
 const activeClass = `${linkClass} nav-link-active bg-[var(--lagoon)]/20 text-[var(--sea-ink)]`
 
-export function NavItems() {
+type NavItemsProps = {
+  onNavigate?: () => void
+}
+
+export function NavItems({ onNavigate }: NavItemsProps) {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   })
 
   return (
-    <nav aria-label="Dashboard">
+    <nav className="dash-nav" aria-label="Dashboard" onClick={onNavigate}>
       <ul className="nav-list m-0 flex list-none flex-wrap gap-2 p-0 md:flex-col md:gap-1">
         {dashboardNavItems.map((item) => {
           const isActive =

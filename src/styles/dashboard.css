@@ -1,0 +1,158 @@
+/* Shared responsive and accessibility polish for the PREIshare investor shell.
+   Imported from src/styles.css, the global stylesheet the root layout already loads.
+   Narrow breakpoint: sidebar collapses below 768px.
+   Wider breakpoint: sidebar sits beside content from 768px up.
+   Card grids: 1 column, then 2 from 640px, then 3 from 1024px.
+*/
+
+:root {
+  --dash-sidebar-width: 16rem;
+  --dash-header-height: 3.5rem;
+  --dash-gap: 1rem;
+  --dash-radius: 0.5rem;
+  --dash-focus: #1d4ed8;
+  --dash-touch-min: 44px;
+}
+
+.dash-shell {
+  display: flex;
+  min-height: 70vh;
+  width: 100%;
+}
+
+.dash-sidebar {
+  width: var(--dash-sidebar-width);
+  flex-shrink: 0;
+  min-height: 0;
+  padding: 1.25rem 1rem;
+}
+
+.dash-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-header {
+  min-height: var(--dash-header-height);
+  display: flex;
+  align-items: center;
+  gap: var(--dash-gap);
+  padding: 0.75rem 1rem;
+}
+
+.dash-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dash-gap);
+}
+
+.dash-menu-toggle {
+  display: none;
+}
+
+.dash-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--dash-gap);
+}
+
+@media (min-width: 640px) {
+  .dash-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .dash-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.dash-card-grid--panels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--dash-gap);
+}
+
+@media (min-width: 768px) {
+  .dash-card-grid--panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.dash-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dash-table-wrap table {
+  min-width: 36rem;
+}
+
+.dash-nav a,
+.dash-nav button,
+.dash-header button {
+  min-height: var(--dash-touch-min);
+  min-width: var(--dash-touch-min);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.dash-nav a:focus-visible,
+.dash-nav button:focus-visible,
+.dash-header a:focus-visible,
+.dash-header button:focus-visible,
+.dash-content a:focus-visible,
+.dash-content button:focus-visible {
+  outline: 2px solid var(--dash-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .dash-shell {
+    flex-direction: column;
+  }
+
+  .dash-sidebar {
+    width: 100%;
+    min-height: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .dash-shell.nav-open .dash-sidebar {
+    max-height: 80vh;
+    overflow: auto;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .dash-header .dash-menu-toggle {
+    display: inline-flex;
+    min-height: var(--dash-touch-min);
+    min-width: var(--dash-touch-min);
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .dash-header .dash-menu-toggle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-sidebar,
+  .dash-shell * {
+    transition: none !important;
+  }
+}
