@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link } from '@tanstack/react-router'
+import { NavItems } from './NavItems'
 
 type SidebarProps = {
   brandLabel?: string
@@ -16,44 +16,8 @@ export function Sidebar({ brandLabel = 'PREIshare', children }: SidebarProps) {
       <div className="sidebar-brand mb-4 text-base font-semibold tracking-tight text-[var(--sea-ink)]">
         {brandLabel}
       </div>
-      <nav className="sidebar-nav" aria-label="Dashboard areas">
-        {/* Placeholder links — full nav config and active states come in the next step */}
-        <ul className="m-0 flex list-none flex-wrap gap-2 p-0 md:flex-col md:gap-1">
-          <li>
-            <Link
-              to="/dashboard"
-              className="block rounded-lg px-3 py-2 text-sm font-semibold text-[var(--sea-ink)] no-underline hover:bg-[var(--chip-bg)]"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/dashboard/portfolio"
-              className="block rounded-lg px-3 py-2 text-sm font-semibold text-[var(--sea-ink)] no-underline hover:bg-[var(--chip-bg)]"
-            >
-              Portfolio
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/dashboard/deals"
-              className="block rounded-lg px-3 py-2 text-sm font-semibold text-[var(--sea-ink)] no-underline hover:bg-[var(--chip-bg)]"
-            >
-              Deals
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/dashboard/profile"
-              className="block rounded-lg px-3 py-2 text-sm font-semibold text-[var(--sea-ink)] no-underline hover:bg-[var(--chip-bg)]"
-            >
-              Profile
-            </Link>
-          </li>
-        </ul>
-        {children}
-      </nav>
+      <NavItems />
+      {children}
     </aside>
   )
 }
