@@ -1,27 +1,22 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PortfolioSummary } from '../../components/dashboard/PortfolioSummary'
-import { RecentActivity } from '../../components/dashboard/RecentActivity'
-import { StatsCard } from '../../components/dashboard/StatsCard'
 
 export const Route = createFileRoute('/dashboard/')({
-  component: DashboardHomePage,
+  component: DashboardHome,
 })
 
-function DashboardHomePage() {
+function DashboardHome() {
   return (
-    <div className="dashboard-home space-y-6">
-      <p className="sample-data-banner m-0 text-sm text-[var(--sea-ink-soft)]" role="note">
-        Demo shell — all figures are placeholders
+    <section aria-labelledby="dashboard-home-heading">
+      <h2
+        id="dashboard-home-heading"
+        className="text-xl font-semibold text-[var(--sea-ink)]"
+      >
+        Welcome back
+      </h2>
+      <p className="mt-2 max-w-prose text-[var(--sea-ink-soft)]">
+        Portfolio metrics and recent activity will appear here. This placeholder
+        confirms the /dashboard route tree is wired correctly.
       </p>
-      <div className="dashboard-home__stats dash-card-grid">
-        <StatsCard label="Total portfolio value" value="$300,000" hint="Sample total" />
-        <StatsCard label="Open deals" value="3" hint="Sample count" />
-        <StatsCard label="Contributions YTD" value="$24,000" hint="Sample YTD" />
-      </div>
-      <div className="dashboard-home__panels dash-card-grid dash-card-grid--panels">
-        <PortfolioSummary totalLabel="$300,000" />
-        <RecentActivity />
-      </div>
-    </div>
+    </section>
   )
 }
