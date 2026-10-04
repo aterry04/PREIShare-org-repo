@@ -22,7 +22,7 @@ export interface InvestorListingBase {
   /** Set once when the row is created. */
   readonly createdAt: string
 
-  /** May change when the listing is edited; still not a business key. */
+  /** May change when the listing is edited; still not a business key. */ 
   readonly updatedAt: string
 
   /** Short public headline shown in search results and cards. */
