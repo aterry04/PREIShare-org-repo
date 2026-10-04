@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardActivityRouteImport } from './routes/dashboard/activity'
 import { Route as DashboardDealsRouteImport } from './routes/dashboard/deals'
 import { Route as DashboardPortfolioRouteImport } from './routes/dashboard/portfolio'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
@@ -37,6 +38,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
+const DashboardActivityRoute = DashboardActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
 const DashboardDealsRoute = DashboardDealsRouteImport.update({
   id: '/deals',
   path: '/deals',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/deals': typeof DashboardDealsRoute
   '/dashboard/portfolio': typeof DashboardPortfolioRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/deals': typeof DashboardDealsRoute
   '/dashboard/portfolio': typeof DashboardPortfolioRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/deals': typeof DashboardDealsRoute
   '/dashboard/portfolio': typeof DashboardPortfolioRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/about'
+    | '/dashboard/activity'
     | '/dashboard/deals'
     | '/dashboard/portfolio'
     | '/dashboard/profile'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/dashboard/activity'
     | '/dashboard/deals'
     | '/dashboard/portfolio'
     | '/dashboard/profile'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/about'
+    | '/dashboard/activity'
     | '/dashboard/deals'
     | '/dashboard/portfolio'
     | '/dashboard/profile'
@@ -145,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
+    '/dashboard/activity': {
+      id: '/dashboard/activity'
+      path: '/activity'
+      fullPath: '/dashboard/activity'
+      preLoaderRoute: typeof DashboardActivityRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
     '/dashboard/deals': {
       id: '/dashboard/deals'
       path: '/deals'
@@ -170,6 +189,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteRouteChildren {
+  DashboardActivityRoute: typeof DashboardActivityRoute
   DashboardDealsRoute: typeof DashboardDealsRoute
   DashboardPortfolioRoute: typeof DashboardPortfolioRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
@@ -177,6 +197,7 @@ interface DashboardRouteRouteChildren {
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardActivityRoute: DashboardActivityRoute,
   DashboardDealsRoute: DashboardDealsRoute,
   DashboardPortfolioRoute: DashboardPortfolioRoute,
   DashboardProfileRoute: DashboardProfileRoute,
