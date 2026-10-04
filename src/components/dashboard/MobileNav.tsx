@@ -22,7 +22,7 @@ export function MobileNav({ items = dashboardNavItems }: MobileNavProps) {
   })
 
   return (
-    <div className="md:hidden">
+    <div className="relative md:hidden">
       <button
         type="button"
         className="min-h-11 rounded-lg border border-[var(--line)] bg-[var(--chip-bg)] px-3 text-sm font-semibold text-[var(--sea-ink)]"
@@ -36,7 +36,7 @@ export function MobileNav({ items = dashboardNavItems }: MobileNavProps) {
         <nav
           id="mobile-dashboard-menu"
           aria-label="Dashboard"
-          className="mt-2 rounded-lg border border-[var(--line)] bg-[var(--surface-strong)] p-3"
+          className="absolute left-0 right-0 top-full z-20 mt-2 rounded-lg border border-[var(--line)] bg-[var(--surface-strong)] p-3 shadow-lg"
         >
           <ul className="m-0 flex list-none flex-col gap-1 p-0">
             {items.map((item) => {
