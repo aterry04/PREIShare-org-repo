@@ -1,80 +1,66 @@
 export type ActivityItem = {
   id: string
-  title: string
-  detail: string
-  dateLabel: string
+  /** Already-formatted time label for display, for example "Mar 18 · 2:04 PM" */
+  whenLabel: string
+  description: string
+  category?: string
 }
 
 export type RecentActivityProps = {
   title?: string
   items?: ActivityItem[]
-  isSampleData?: boolean
+  /** Shown when items is an empty list */
+  emptyMessage?: string
 }
 
-export const DEFAULT_MOCK_ACTIVITY: ActivityItem[] = [
+/** MOCK PLACEHOLDER — replace with a real activity feed later */
+export const MOCK_RECENT_ACTIVITY: ActivityItem[] = [
   {
     id: 'a1',
-    title: 'Distribution posted (sample)',
-    detail: 'Sample Multifamily Fund A',
-    dateLabel: 'Mar 1, 2026',
+    whenLabel: 'Mar 18, 2026 · 2:04 PM',
+    description: 'Distribution posted for Riverfront Multifamily (sample)',
+    category: 'Distribution',
   },
   {
     id: 'a2',
-    title: 'Capital call notice (sample)',
-    detail: 'Sample Industrial Note B',
-    dateLabel: 'Feb 18, 2026',
+    whenLabel: 'Mar 17, 2026 · 11:20 AM',
+    description: 'Quarterly report available for Cedar Retail Plaza (sample)',
+    category: 'Document',
   },
   {
     id: 'a3',
-    title: 'Profile document uploaded (sample)',
-    detail: 'Accreditation letter',
-    dateLabel: 'Feb 5, 2026',
+    whenLabel: 'Mar 15, 2026 · 9:00 AM',
+    description: 'Capital call reminder — Harbor Industrial (sample)',
+    category: 'Notice',
   },
 ]
 
 export function RecentActivity({
   title = 'Recent activity',
-  items = DEFAULT_MOCK_ACTIVITY,
-  isSampleData = true,
+  items = MOCK_RECENT_ACTIVITY,
+  emptyMessage = 'No recent activity',
 }: RecentActivityProps) {
   return (
     <section
-      className="recent-activity rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] p-4 sm:p-5"
-      aria-labelledby="recent-activity-heading"
+      className="rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] p-4"
+      aria-label={title}
     >
-      <div className="recent-activity__header mb-4">
-        <h2
-          id="recent-activity-heading"
-          className="m-0 text-lg font-semibold text-[var(--sea-ink)]"
-        >
-          {title}
-        </h2>
-        {isSampleData ? (
-          <p className="sample-data-banner m-0 mt-2 text-sm text-[var(--sea-ink-soft)]" role="note">
-            Sample activity — not connected to a live feed
-          </p>
-        ) : null}
-      </div>
-      <ol className="recent-activity__list m-0 list-none space-y-3 p-0">
-        {items.map((item) => (
-          <li
-            key={item.id}
-            className="recent-activity__item flex flex-wrap items-start justify-between gap-3 border-t border-[var(--line)] pt-3"
-          >
-            <div className="recent-activity__body">
-              <p className="recent-activity__title m-0 font-medium text-[var(--sea-ink)]">
-                {item.title}
-              </p>
-              <p className="recent-activity__detail m-0 mt-1 text-sm text-[var(--sea-ink-soft)]">
-                {item.detail}
-              </p>
-            </div>
-            <time className="recent-activity__date text-sm text-[var(--sea-ink-soft)]">
-              {item.dateLabel}
-            </time>
-          </li>
-        ))}
-      </ol>
+      <h2 className="m-0 text-lg font-semibold text-[var(--sea-ink)]">{title}</h2>
+      {items.length === 0 ? (
+        <p className="m-0 mt-4 text-sm text-[var(--sea-ink-soft)]">{emptyMessage}</p>
+      ) : (
+        <ul className="m-0 mt-4 list-none space-y-3 p-0">
+          {items.map((item) => (
+            <li key={item.id} className="border-l-2 border-[var(--line)] pl-3">
+              <p className="m-0 text-xs text-[var(--sea-ink-soft)]">{item.whenLabel}</p>
+              <p className="m-0 text-sm font-medium text-[var(--sea-ink)]">{item.description}</p>
+              {item.category ? (
+                <p className="m-0 text-xs text-[var(--sea-ink-soft)]">{item.category}</p>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   )
 }
