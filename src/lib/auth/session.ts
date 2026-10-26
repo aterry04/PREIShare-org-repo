@@ -107,6 +107,11 @@ export async function getUser() {
   return session?.user ?? null
 }
 
+/** Access token for the cookie session. Call after getUser() so a refresh is already saved. */
+export function readSponsorAccessToken(): string | null {
+  return readStoredSession()?.accessToken ?? null
+}
+
 export async function signOut() {
   const stored = readStoredSession()
   if (stored) {
