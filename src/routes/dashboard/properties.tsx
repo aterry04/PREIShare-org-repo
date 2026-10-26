@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { Link, Outlet, createFileRoute, redirect, useRouterState } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 
 export type PropertyListItem = {
@@ -48,6 +48,10 @@ export const Route = createFileRoute('/dashboard/properties')({
 
 function PropertiesPage() {
   const { properties, error } = Route.useLoaderData()
+  const pathname = useRouterState({ select: (state) => state.location.pathname })
+  if (pathname !== '/dashboard/properties') {
+    return <Outlet />
+  }
 
   return (
     <section className="space-y-4" aria-labelledby="properties-heading">
@@ -58,6 +62,12 @@ function PropertiesPage() {
         <p className="text-sm text-[var(--sea-ink-soft)]">
           Listings you are allowed to manage. Visibility is enforced by the database, not only by this page.
         </p>
+        <Link
+          to="/dashboard/properties/new"
+          className="inline-block text-sm font-semibold text-[var(--lagoon-deep)] underline"
+        >
+          Add property
+        </Link>
       </header>
 
       {error ? (
