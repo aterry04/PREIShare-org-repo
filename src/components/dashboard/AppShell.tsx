@@ -8,6 +8,8 @@ export type AppShellProps = {
   children: ReactNode
   /** Forwarded to Header as the section label */
   title?: string
+  /** Forwarded to Header, for example the sign-out control */
+  actions?: ReactNode
   /** Optional sidebar slot. The real Sidebar arrives in a later step. */
   sidebar?: ReactNode
 }
@@ -15,10 +17,10 @@ export type AppShellProps = {
 /**
  * Shared frame for /dashboard routes: header, reserved sidebar, main slot.
  */
-export function AppShell({ children, title, sidebar }: AppShellProps) {
+export function AppShell({ children, title, actions, sidebar }: AppShellProps) {
   return (
     <div className="flex min-h-[70vh] flex-col rounded-2xl border border-[var(--line)] bg-[var(--surface)] text-[var(--sea-ink)]">
-      <Header title={title} />
+      <Header title={title} actions={actions} />
       <div className="border-b border-[var(--line)] px-4 py-3 md:hidden">
         <MobileNav />
       </div>
