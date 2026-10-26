@@ -47,7 +47,7 @@ function LoginPage() {
         password,
       })
       if (signInError || !data.session) {
-        setError('Email or password is incorrect.')
+        setError(signInError?.message ?? 'Email or password is incorrect.')
         return
       }
       await storeSponsorSession({
