@@ -37,7 +37,7 @@
 - `src/routes/dashboard.tsx` — session-aware dashboard shell
 - `src/routes/dashboard/properties.tsx` — protected property list
 - `src/routes/dashboard/properties.new.tsx` — create under RLS
-- `supabase/migrations/20250321000000_sponsors_properties_rls.sql` — schema and RLS for `profiles` and `property_listings`
+- `supabase/migrations/20250322000000_sponsors_properties_rls.sql` — schema and RLS for `profiles` and `property_listings`
 
 ## Known limitations
 

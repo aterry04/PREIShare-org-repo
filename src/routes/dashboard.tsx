@@ -1,7 +1,7 @@
 import { Outlet, createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { AppShell } from '../components/dashboard/AppShell'
-import { createBrowserSupabaseClient } from '../lib/supabase.client'
+import { signOutOnBrowser } from '../lib/auth/browser-session'
 
 const loadSponsor = createServerFn({ method: 'GET' }).handler(async () => {
   const { readSponsorAccessToken } = await import('../lib/auth/session')
@@ -38,7 +38,7 @@ function DashboardLayout() {
   async function handleSignOut() {
     await endSponsorSession()
     try {
-      await createBrowserSupabaseClient().auth.signOut()
+      await signOutOnBrowser()
     } catch {
       // The cleared server session is what blocks /dashboard.
     }

@@ -1,7 +1,7 @@
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { useState, type FormEvent } from 'react'
-import { createBrowserSupabaseClient } from '../../lib/supabase/client'
+import { signUpOnBrowser } from '../../lib/auth/browser-session'
 
 const storeSponsorSession = createServerFn({ method: 'POST' })
   .validator((input: unknown) => {
@@ -43,23 +43,19 @@ function SignupPage() {
     setNotice('')
     setPending(true)
     try {
-      const supabase = createBrowserSupabaseClient()
-      const { data, error: signUpError } = await supabase.auth.signUp({
-        email: email.trim(),
-        password,
-      })
-      if (signUpError) {
-        setError(signUpError.message)
+      const result = await signUpOnBrowser(email.trim(), password)
+      if (result.message) {
+        setError(result.message)
         return
       }
-      if (!data.session) {
+      if (!result.session) {
         setNotice('Check your email to confirm the account, then log in.')
         return
       }
       await storeSponsorSession({
         data: {
-          accessToken: data.session.access_token,
-          refreshToken: data.session.refresh_token,
+          accessToken: result.session.accessToken,
+          refreshToken: result.session.refreshToken,
         },
       })
       await navigate({ to: '/dashboard' })

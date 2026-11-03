@@ -1,4 +1,4 @@
--- supabase/migrations/20250321000000_sponsors_properties_rls.sql
+-- supabase/migrations/20250322000000_sponsors_properties_rls.sql
 -- Implements docs/data-model-and-rls-matrix.md only.
 -- No secrets. The service-role key is not in this file and is not granted here.
 --
