@@ -13,7 +13,7 @@ Enable semantic property search storage in Supabase PostgreSQL with pgvector, al
 - Embedding dimension: `DIMENSION_TODO`
 - Ranking style for the demo: cosine distance with pgvector `<=>` (a smaller number is a closer match)
 
-`property_listings` already has `id`, `title`, `summary`, `city`, `asking_price`, `created_at`, `owner_id`, and the other listing columns from `docs/data-model-and-rls-matrix.md`. This migration adds `embedding` only. Existing files `supabase/migrations/20250321000000_property_listings.sql` and `supabase/migrations/20250322000000_sponsors_properties_rls.sql` stay as they are. The tutorial file is `supabase/migrations/20250315000000_enable_pgvector_properties.sql`. That name sorts before the listings table, so the SQL adds `embedding` only when `property_listings` is already there.
+`property_listings` already has `id`, `title`, `summary`, `city`, `asking_price`, `created_at`, `owner_id`, and the other listing columns from `docs/data-model-and-rls-matrix.md`. `supabase/migrations/20250315000000_enable_pgvector_properties.sql` runs first. It enables `vector` and creates `property_listings` with `id`, `title`, `summary`, and `embedding vector(DIMENSION_TODO)`. `supabase/migrations/20250321000000_property_listings.sql` then adds the remaining sponsor columns when that early table is already present.
 
 ## Migration goals (what “done” means)
 
