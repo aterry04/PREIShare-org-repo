@@ -44,6 +44,7 @@ export type PropertyListingRow = {
   closed_at: string | null
   created_at: string
   updated_at: string
+  embedding: string | null
 }
 
 export type PropertyListingInsert = {
@@ -66,6 +67,7 @@ export type PropertyListingInsert = {
   closed_at?: string | null
   created_at?: string
   updated_at?: string
+  embedding?: string | null
 }
 
 export type PropertyListingUpdate = {
@@ -88,6 +90,7 @@ export type PropertyListingUpdate = {
   closed_at?: string | null
   created_at?: string
   updated_at?: string
+  embedding?: string | null
 }
 
 export type Database = {

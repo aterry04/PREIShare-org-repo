@@ -1,0 +1,93 @@
+{
+  "_comment": "Sample listings for semantic search. summary is the description. Ids are stable so the seed can upsert. property_type must be one of the listing checks.",
+  "properties": [
+    {
+      "id": "a1000000-0000-4000-8000-000000000001",
+      "title": "Still Shore Cottage",
+      "summary": "A small cottage sits on a still shore with a private path down to the water. Guests book short stays through the summer, and the path stays empty after dusk.",
+      "property_type": "land",
+      "address_line1": "18 Shore Path",
+      "city": "Hoodsport",
+      "region": "WA",
+      "postal_code": "98548",
+      "asking_price": 640000
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000002",
+      "title": "Lincoln Cul-de-sac House",
+      "summary": "Four bedrooms open onto a fenced yard on a cul-de-sac two blocks from Lincoln Elementary. Parents walk children to class, and the street has little traffic after the bell.",
+      "property_type": "multifamily",
+      "address_line1": "42 Maple Court",
+      "city": "Bellevue",
+      "region": "WA",
+      "postal_code": "98004",
+      "asking_price": 890000
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000003",
+      "title": "Cafe Street Flat",
+      "summary": "A second-floor flat sits above a cafe street in the city center. Dinner spots and small offices are a short walk from the front door.",
+      "property_type": "mixed_use",
+      "address_line1": "510 Pike Street",
+      "city": "Seattle",
+      "region": "WA",
+      "postal_code": "98101",
+      "asking_price": 725000
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000004",
+      "title": "Irrigated Crop Parcel",
+      "summary": "This parcel is large irrigated cropland with long crop rows, a pump shed, and no house. The ground is for production, not for guests or a residence.",
+      "property_type": "land",
+      "address_line1": "900 County Road 12",
+      "city": "Moses Lake",
+      "region": "WA",
+      "postal_code": "98837",
+      "asking_price": 1100000
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000005",
+      "title": "Midnight Venue Loft",
+      "summary": "An open loft looks over late-night venues and a busy restaurant row. The train and weekday offices are nearby, and the street stays loud past midnight.",
+      "property_type": "mixed_use",
+      "address_line1": "88 Yesler Way",
+      "city": "Seattle",
+      "region": "WA",
+      "postal_code": "98104",
+      "asking_price": 680000
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000006",
+      "title": "Dock House with Guest Bookings",
+      "summary": "Summer bookings already cover most weekends at this lakeside house. The dock is included with each stay, and last season's guest income was steady.",
+      "property_type": "multifamily",
+      "address_line1": "7 Lakeview Lane",
+      "city": "Chelan",
+      "region": "WA",
+      "postal_code": "98816",
+      "asking_price": 815000
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000007",
+      "title": "Weekday Office Floor",
+      "summary": "A downtown office floor has a lobby, elevator banks, and tenants who keep weekday hours. There is no kitchen, no yard, and no place to sleep.",
+      "property_type": "office",
+      "address_line1": "1200 5th Avenue",
+      "city": "Seattle",
+      "region": "WA",
+      "postal_code": "98101",
+      "asking_price": 2400000
+    },
+    {
+      "id": "a1000000-0000-4000-8000-000000000008",
+      "title": "Loading Dock Warehouse",
+      "summary": "A last-mile warehouse has high doors, a loading dock, and room for trucks to turn. It is an industrial building, not a home.",
+      "property_type": "industrial",
+      "address_line1": "3300 E Marginal Way",
+      "city": "Seattle",
+      "region": "WA",
+      "postal_code": "98134",
+      "asking_price": 3100000
+    }
+  ]
+}

@@ -16,6 +16,7 @@ Vite embeds any variable whose name starts with `VITE_` into the browser bundle.
 | `SUPABASE_URL` | Server-only (optional) | Same project URL for server code that should not depend on a `VITE_` variable. | Do not put the service-role key in this variable. It is a URL, not a secret key. |
 | `EMBEDDING_API_KEY` | Server-only | Calls the embedding provider from `src/lib/embeddings/generate.ts`. | Do not prefix it with `VITE_`. Do not commit a real key or paste one into docs. |
 | `EMBEDDING_MODEL` | Server-only (optional) | Model name. Default in code is `text-embedding-3-small`, which returns 1536 numbers. | Do not point this at a model with a different vector length. |
+| `SEED_OWNER_ID` | Server-only | Auth user id stored as `owner_id` on sample listings. | Do not prefix it with `VITE_`. The user must already exist. |
 
 ## What gets committed
 
