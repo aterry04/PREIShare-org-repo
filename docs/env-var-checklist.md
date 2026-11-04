@@ -14,6 +14,8 @@ Vite embeds any variable whose name starts with `VITE_` into the browser bundle.
 | `VITE_SUPABASE_ANON_KEY` | Client-safe | Public anon / publishable key. It identifies the app. It does not bypass Row-Level Security. Safe in the browser only together with the signed-in sponsor’s session and database policies. | Do not use this key for admin or maintenance jobs that need to ignore row rules. |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server-only | Admin bypass. This key skips Row-Level Security and can read or change every row. Read it only in trusted server code. | Do not import it in browser code or shared React components. Do not give it a `VITE_` prefix. Do not commit it, paste it into docs, or send it from the browser. |
 | `SUPABASE_URL` | Server-only (optional) | Same project URL for server code that should not depend on a `VITE_` variable. | Do not put the service-role key in this variable. It is a URL, not a secret key. |
+| `EMBEDDING_API_KEY` | Server-only | Calls the embedding provider from `src/lib/embeddings/generate.ts`. | Do not prefix it with `VITE_`. Do not commit a real key or paste one into docs. |
+| `EMBEDDING_MODEL` | Server-only (optional) | Model name. Default in code is `text-embedding-3-small`, which returns 1536 numbers. | Do not point this at a model with a different vector length. |
 
 ## What gets committed
 

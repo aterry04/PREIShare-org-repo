@@ -6,7 +6,7 @@ create extension if not exists vector;
 -- id is the primary key. title and summary are text. summary is the description.
 -- Do not add a second description column or a table named properties.
 -- embedding is one nullable vector per listing. Dimension matches
--- docs/embedding-data-model.md: vector(DIMENSION_TODO).
+-- docs/embedding-data-model.md: vector(1536).
 -- A null embedding is allowed until seed or backfill. No ivfflat index here:
 -- a small demo compares rows one by one, and the index needs a numeric dimension.
 create extension if not exists pgcrypto;
@@ -15,8 +15,8 @@ create table if not exists public.property_listings (
   id uuid primary key default gen_random_uuid(),
   title text not null,
   summary text,
-  embedding vector(DIMENSION_TODO)
+  embedding vector(1536)
 );
 
 comment on column public.property_listings.embedding is
-  'pgvector embedding of title plus summary. Type vector(DIMENSION_TODO). Nullable until backfill. Rank later with cosine distance <=> (smaller is closer).';
+  'pgvector embedding of title plus summary. Type vector(1536). Nullable until backfill. Rank later with cosine distance <=> (smaller is closer).';

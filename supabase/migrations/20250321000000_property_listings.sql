@@ -64,7 +64,7 @@ alter table public.property_listings
   add column if not exists closed_at timestamptz,
   add column if not exists created_at timestamptz default now(),
   add column if not exists updated_at timestamptz default now(),
-  add column if not exists embedding vector(DIMENSION_TODO);
+  add column if not exists embedding vector(1536);
 
 -- The early table does not include these checks. Skip them when CREATE TABLE already added them.
 do $$

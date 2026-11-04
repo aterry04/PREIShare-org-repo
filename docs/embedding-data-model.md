@@ -60,20 +60,20 @@ Worked check from the requirements: a lakeside cottage can be titled “Still Sh
 
 | Field | Type (logical) | Required | Notes |
 | --- | --- | --- | --- |
-| embedding | vector(DIMENSION_TODO) | yes after backfill | One vector per property. Same length on every row and on every query. |
+| embedding | vector(1536) | yes after backfill | One vector per property. Same length on every row and on every query. |
 
-### Dimension placeholder
+### Dimension
 
-- The only vector length in this contract is **DIMENSION_TODO**.
-- A later step picks the embedding model and replaces DIMENSION_TODO with that model’s count in this doc, the migration, and the TypeScript types, in one pass.
-- Query vectors and stored vectors must use the same model and the same DIMENSION_TODO length. A different length breaks insert or search.
+- The only vector length in this contract is **1536**.
+- The embedding model is `text-embedding-3-small`. That model returns 1536 numbers. `src/lib/embeddings/types.ts` uses the same count.
+- Query vectors and stored vectors must use that same model and the same 1536 length. A different length breaks insert or search.
 - One property has one embedding for this tutorial. Do not store a second vector for a different model on the same row.
 
 ### Nullability and backfill
 
 - A brand-new listing may have `embedding` null for the moment between saving the text and generating the vector.
 - A row with a null embedding, or with an empty `summary`, is not eligible for semantic search.
-- After seed and backfill, every searchable sample property has a non-empty `title`, a non-empty `summary`, and a non-null `embedding` of length DIMENSION_TODO.
+- After seed and backfill, every searchable sample property has a non-empty `title`, a non-empty `summary`, and a non-null `embedding` of length 1536.
 - Lifecycle: save listing text, build the canonical string, generate the embedding outside the database, store the vector on the row, then the row can be ranked.
 
 ## Separation of concerns
@@ -92,7 +92,7 @@ The description stays in `summary` so the page can show it. The vector is only f
 
 - The existing `property_listings` row, plus one `embedding` column
 - One embedding per property
-- The title + summary recipe and the single DIMENSION_TODO length
+- The title + summary recipe and the single length 1536
 - Sample rows a later seed can load for the four requirements queries
 
 **Out of scope**
@@ -110,14 +110,14 @@ The description stays in `summary` so the page can show it. The vector is only f
 - [x] Every search field has a purpose tied to the requirements
 - [x] Primary key is `id` on `property_listings`
 - [x] Embedding input is `{title}` then a blank line then `{summary}`
-- [x] Vector size is only DIMENSION_TODO
+- [x] Vector size is only 1536
 - [x] Raw text and the vector are separate columns
 - [x] `embedding` may be null only before backfill; searchable rows must have a vector
 - [x] Auth, photos, and payments are listed as out of scope
 
 ## Open questions
 
-- Exact embedding model name, and the number that replaces DIMENSION_TODO
+- Model and length are chosen: `text-embedding-3-small`, 1536. The provider key name is `EMBEDDING_API_KEY` (server-only).
 - The SQL similarity or distance operator. Cosine similarity is the planned style. Sort direction waits on whether the function returns similarity or distance.
 - Whether the demo seed inserts new sample rows or backfills embeddings onto listings that already exist
 - Default top-K for the first search call (learner notes suggest 5)

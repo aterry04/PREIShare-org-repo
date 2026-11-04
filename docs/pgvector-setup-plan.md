@@ -10,15 +10,15 @@ Enable semantic property search storage in Supabase PostgreSQL with pgvector, al
 - Table: `property_listings` (already exists; do not create a second table named `properties`)
 - Description text: `summary` (do not add a `description` column)
 - Embedding column: `embedding`
-- Embedding dimension: `DIMENSION_TODO`
+- Embedding dimension: `1536`
 - Ranking style for the demo: cosine distance with pgvector `<=>` (a smaller number is a closer match)
 
-`property_listings` already has `id`, `title`, `summary`, `city`, `asking_price`, `created_at`, `owner_id`, and the other listing columns from `docs/data-model-and-rls-matrix.md`. `supabase/migrations/20250315000000_enable_pgvector_properties.sql` runs first. It enables `vector` and creates `property_listings` with `id`, `title`, `summary`, and `embedding vector(DIMENSION_TODO)`. `supabase/migrations/20250321000000_property_listings.sql` then adds the remaining sponsor columns when that early table is already present.
+`property_listings` already has `id`, `title`, `summary`, `city`, `asking_price`, `created_at`, `owner_id`, and the other listing columns from `docs/data-model-and-rls-matrix.md`. `supabase/migrations/20250315000000_enable_pgvector_properties.sql` runs first. It enables `vector` and creates `property_listings` with `id`, `title`, `summary`, and `embedding vector(1536)`. `supabase/migrations/20250321000000_property_listings.sql` then adds the remaining sponsor columns when that early table is already present.
 
 ## Migration goals (what “done” means)
 
 1. The `vector` extension (pgvector) is installed.
-2. `property_listings.embedding` exists as a nullable `vector(DIMENSION_TODO)`.
+2. `property_listings.embedding` exists as a nullable `vector(1536)`.
 3. A row may keep `embedding` null until a later seed or backfill fills it.
 4. One column, one length. No second embedding column and no other dimension.
 5. Verification queries show the extension, the column shape, and that a null vector is allowed.
@@ -29,7 +29,7 @@ Enable semantic property search storage in Supabase PostgreSQL with pgvector, al
 | Order | Step | Why this order |
 | --- | --- | --- |
 | 1 | Enable extension `vector` (pgvector) | The `vector` type and the `<=>` operator do not exist until the extension is on. |
-| 2 | Add nullable `embedding vector(DIMENSION_TODO)` to the existing `property_listings` table | The column type depends on the extension. The table already exists, so this is an alter, not a new listings table. |
+| 2 | Add nullable `embedding vector(1536)` to the existing `property_listings` table | The column type depends on the extension. The table already exists, so this is an alter, not a new listings table. |
 | 3 | Skip the vector index for this demo | An index can be created only after the column exists. A handful of sample rows can be compared one by one. |
 | 4 | Run the verification queries | Confirm the schema before any seed or app code. |
 
@@ -47,7 +47,7 @@ The canonical text that will be embedded later is still `title`, a blank line, t
 ## Index recommendation
 
 - **Demo scale (a small sample set):** no vector index. Sequential comparison is acceptable.
-- **If a later change adds an index:** create it only after `embedding` exists, only for rows that already have a vector, and only with the operator class that matches `<=>` and `vector(DIMENSION_TODO)`. Do not add that index in the first pgvector migration.
+- **If a later change adds an index:** create it only after `embedding` exists, only for rows that already have a vector, and only with the operator class that matches `<=>` and `vector(1536)`. Do not add that index in the first pgvector migration.
 
 ## Environment values (names only)
 
@@ -64,9 +64,9 @@ Turning on pgvector does not need an embedding-provider key. The provider and it
 ## Verification queries (run in the Supabase SQL editor after the migration)
 
 1. Show that extension `vector` is installed.
-2. Show that `property_listings.embedding` is a `vector` of length `DIMENSION_TODO`.
+2. Show that `property_listings.embedding` is a `vector` of length `1536`.
 3. Show that a null `embedding` is allowed on an existing or temporary row, then remove any temporary row.
-4. Compare two short literal vectors with `<=>` to prove the operator works. That smoke test can use a tiny length such as 3. It does not change the column length. The column stays `vector(DIMENSION_TODO)`.
+4. Compare two short literal vectors with `<=>` to prove the operator works. That smoke test can use a tiny length such as 3. It does not change the column length. The column stays `vector(1536)`.
 
 ```sql
 -- 1) extension present
@@ -92,8 +92,8 @@ Check 3 is an update or insert that sets `embedding` to null and then selects th
 - A new `properties` table or a `description` column
 - Changes to sponsor login, `owner_id`, or existing row-level security
 - A vector index, hybrid keyword plus vector ranking, filters, or re-ranking
-- Choosing the embedding vendor or replacing `DIMENSION_TODO` with a number (that happens in one pass across the data model, this plan, the migration, and the TypeScript types)
+- Changing the vector length away from 1536, or calling a model other than `text-embedding-3-small`
 
 ## Handoff to the next step
 
-The migration implements ordered steps 1 and 2 only: enable `vector`, then add nullable `property_listings.embedding` as `vector(DIMENSION_TODO)`. It does not add an index. It must not rename the table, add a second vector column, or pick a dimension other than `DIMENSION_TODO`.
+The migration implements ordered steps 1 and 2 only: enable `vector`, then add nullable `property_listings.embedding` as `vector(1536)`. It does not add an index. It must not rename the table, add a second vector column, or pick a dimension other than `1536`.
