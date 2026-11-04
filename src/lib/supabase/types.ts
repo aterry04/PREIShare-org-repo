@@ -104,6 +104,19 @@ export type Database = {
       }
     }
     Views: Record<string, never>
-    Functions: Record<string, never>
+    Functions: {
+      match_properties: {
+        Args: {
+          query_embedding: string
+          match_count?: number
+        }
+        Returns: Array<{
+          id: string
+          title: string
+          description: string
+          similarity: number
+        }>
+      }
+    }
   }
 }
