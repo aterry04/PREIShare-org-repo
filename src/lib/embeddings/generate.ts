@@ -7,7 +7,7 @@ import {
   type PropertyEmbeddingInput,
 } from './types'
 
-const DEFAULT_EMBEDDING_MODEL = 'text-embedding-3-small'
+const DEFAULT_EMBEDDING_MODEL = 'gemini-embedding-001'
 
 /**
  * Combine title and description the same way the data model describes.
@@ -82,31 +82,48 @@ export async function generatePropertyEmbedding(
   }
 }
 
+function normalizeEmbedding(values: number[]): number[] {
+  let sumOfSquares = 0
+  for (const value of values) sumOfSquares += value * value
+  const magnitude = Math.sqrt(sumOfSquares)
+  if (magnitude === 0) return values
+  return values.map((value) => value / magnitude)
+}
+
 async function callEmbeddingProvider(text: string, apiKey: string): Promise<number[]> {
   const model = process.env.EMBEDDING_MODEL ?? DEFAULT_EMBEDDING_MODEL
-  const response = await fetch('https://api.openai.com/v1/embeddings', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:embedContent`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey,
+      },
+      body: JSON.stringify({
+        content: { parts: [{ text }] },
+        outputDimensionality: EMBEDDING_DIMENSIONS,
+      }),
     },
-    body: JSON.stringify({
-      model,
-      input: text,
-      dimensions: EMBEDDING_DIMENSIONS,
-    }),
-  })
+  )
 
   if (!response.ok) {
-    throw new Error(`Embedding provider returned HTTP ${response.status}.`)
+    const failure = (await response.json().catch(() => null)) as {
+      error?: { status?: string; message?: string }
+    } | null
+    const status = failure?.error?.status
+    const detail = failure?.error?.message
+    throw new Error(
+      `Embedding provider returned HTTP ${response.status}${status ? ` ${status}` : ''}${detail ? `: ${detail}` : '.'}`,
+    )
   }
 
   const body = (await response.json()) as {
-    data?: Array<{ embedding?: number[] }>
+    embedding?: { values?: number[] }
   }
-  const embedding = body.data?.[0]?.embedding
+  const embedding = body.embedding?.values
   if (!embedding) {
     throw new Error('Embedding provider returned no vector.')
   }
-  return embedding
+  return normalizeEmbedding(embedding)
 }

@@ -65,7 +65,7 @@ Worked check from the requirements: a lakeside cottage can be titled “Still Sh
 ### Dimension
 
 - The only vector length in this contract is **1536**.
-- The embedding model is `text-embedding-3-small`. That model returns 1536 numbers. `src/lib/embeddings/types.ts` uses the same count.
+- The embedding model is `gemini-embedding-001`, requested at 1536 numbers. `src/lib/embeddings/types.ts` uses the same count.
 - Query vectors and stored vectors must use that same model and the same 1536 length. A different length breaks insert or search.
 - One property has one embedding for this tutorial. Do not store a second vector for a different model on the same row.
 
@@ -117,7 +117,7 @@ The description stays in `summary` so the page can show it. The vector is only f
 
 ## Open questions
 
-- Model and length are chosen: `text-embedding-3-small`, 1536. The provider key name is `EMBEDDING_API_KEY` (server-only).
+- Model and length are chosen: `gemini-embedding-001`, 1536. The provider key name is `EMBEDDING_API_KEY` (server-only).
 - The SQL similarity or distance operator. Cosine similarity is the planned style. Sort direction waits on whether the function returns similarity or distance.
 - Whether the demo seed inserts new sample rows or backfills embeddings onto listings that already exist
 - Default top-K for the first search call (learner notes suggest 5)

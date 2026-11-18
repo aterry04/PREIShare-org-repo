@@ -92,7 +92,7 @@ Check 3 is an update or insert that sets `embedding` to null and then selects th
 - A new `properties` table or a `description` column
 - Changes to sponsor login, `owner_id`, or existing row-level security
 - A vector index, hybrid keyword plus vector ranking, filters, or re-ranking
-- Changing the vector length away from 1536, or calling a model other than `text-embedding-3-small`
+- Changing the vector length away from 1536, or calling a model other than `gemini-embedding-001`
 
 ## Handoff to the next step
 

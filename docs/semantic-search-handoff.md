@@ -21,7 +21,7 @@ Actors, from `docs/semantic-search-requirements.md`: the buyer types everyday in
 Filled from `docs/embedding-data-model.md`, `docs/pgvector-setup-plan.md`, and `docs/semantic-search-verification.md`.
 
 - **What text is embedded:** `{title}`, a blank line, then `{summary}`. `summary` is the description. Do not add a `description` column. `id`, `owner_id`, `city`, and `asking_price` stay out of the vector. A buyer query is embedded as its own string. The helper sends the query text with an empty title so the stored recipe still applies.
-- **Embedding dimensions:** 1536. Model: `text-embedding-3-small`. The column type, the TypeScript constant, and the SQL function argument use that same length.
+- **Embedding dimensions:** 1536. Model: `gemini-embedding-001`. The column type, the TypeScript constant, and the SQL function argument use that same length.
 - **Distance / similarity metric:** pgvector cosine distance, operator `<=>`. A smaller distance is closer. The function sorts by that distance (closest first) and returns `similarity` as `1 - distance`, so a larger similarity is a better match. Rows with a null embedding are left out.
 - **Top-K / match count:** 5. The SQL default is 5, and the helper clamps the count between 1 and 50.
 - **Where embeddings are created:** in the app, in `src/lib/embeddings/generate.ts`, using `EMBEDDING_API_KEY` on the server. PostgreSQL stores the numbers. It does not call the embedding provider.
@@ -71,7 +71,7 @@ From `docs/semantic-search-verification.md` (tested 2026-11-04 by Alexis Terry).
 ## 6. How to re-run the demo (handoff checklist)
 
 1. On project `twvlvorheamrmrfktcgi`, apply `supabase/migrations/20250315000000_enable_pgvector_properties.sql`, then `supabase/migrations/20250315000001_match_properties_function.sql`, then the later listing migration if the sponsor columns are still missing. Confirm `embedding` is `vector(1536)`.
-2. In `.env.local`, set `EMBEDDING_API_KEY`, optional `EMBEDDING_MODEL` (`text-embedding-3-small`), and `SEED_OWNER_ID` to an existing Auth user id. Keep `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` server-only. Do not commit those values.
+2. In `.env.local`, set `EMBEDDING_API_KEY`, optional `EMBEDDING_MODEL` (`gemini-embedding-001`), and `SEED_OWNER_ID` to an existing Auth user id. Keep `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` server-only. Do not commit those values.
 3. From the repo root, run `npx tsx scripts/seed-property-embeddings.ts`. Confirm 8 sample rows and a null embedding count of 0.
 4. Start the app (`npm run dev`) and open `/search`. Try the four queries in `docs/semantic-search-requirements.md`, plus one paraphrase that does not copy the cottage’s exact words.
 5. Write the real top titles into `docs/semantic-search-verification.md`. The 2026-11-04 rows are failures, and they stay failures until this checklist is done.
@@ -88,7 +88,7 @@ From `docs/semantic-search-verification.md` (tested 2026-11-04 by Alexis Terry).
 
 ## 8. Open questions for mentor / next owner
 
-- Is `text-embedding-3-small` at 1536 the production lock, or only the tutorial choice? Changing either value means re-embedding every stored row.
+- Is `gemini-embedding-001` at 1536 the production lock, or only the tutorial choice? Changing either value means re-embedding every stored row.
 - Should PREIshare keep cosine distance (`<=>`) everywhere, with similarity shown as `1 - distance`?
 - Who owns the embedding cost budget and rotation of `EMBEDDING_API_KEY`?
 - For the next stakeholder demo, which filter comes first: max asking price, or property type?
