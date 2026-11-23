@@ -10,7 +10,9 @@
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "node scripts/lint-ci.mjs",
+    "test": "node --test tests/listing-schema.test.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",

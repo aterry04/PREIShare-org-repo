@@ -18,13 +18,13 @@ Sources: `docs/ci/pr-pain-and-goals.md`, `docs/ci/ci-concepts-notes.md`, and `do
 1. **Checkout** — download the pull request commit onto the GitHub-hosted runner.
 2. **Setup Node** — install Node.js 22. The repo has no `.nvmrc` and no `engines` field. `@types/node` is `^22.10.2`, so 22 is the design choice, not a version the manifest already pins. Do not use pnpm. The lockfile is `package-lock.json`.
 3. **Install dependencies** — `npm ci`, so the runner installs the versions pinned in `package-lock.json`.
-4. **Lint** — gap. There is no `lint` script and no ESLint config. Do not run a lint command.
-5. **Typecheck** — `npm run typecheck` (`tsc --noEmit`). This is the first required quality gate after install. It does not need Supabase.
-6. **Test** — gap. There is no `test` script and no test runner. Do not run a test command.
+4. **Lint** — `npm run lint` (`node scripts/lint-ci.mjs`). There is still no ESLint package. The script fails if client or route files name the service-role key.
+5. **Typecheck** — `npm run typecheck` (`tsc --noEmit`). It does not need Supabase.
+6. **Test** — `npm run test` (`node --test tests/listing-schema.test.ts`). One pass, then the process exits. No browser and no database.
 7. **Prepare public build env** — set only `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to the placeholder strings already committed in `.env.example`. Those names are public. This stage exists so the next stage does not load an empty client module.
 8. **Build** — `npm run build` (`vite build`).
 
-Lint and test are omitted from the executed job on purpose. The inventory marks both MISSING. Calling `npm run lint` or `npm run test` would fail every pull request for a missing script, which is not a product failure.
+Lint and test are required now that `package.json` has those scripts. They use Node, which is already on the runner. They do not add ESLint, Vitest, or a browser suite.
 
 `npm run dev`, `npm run preview`, and `npm run generate-routes` are not stages. The first two start a server and wait. `generate-routes` rewrites `src/routeTree.gen.ts`, which is already committed, and `build` does not call it.
 
@@ -35,17 +35,16 @@ Lint and test are omitted from the executed job on purpose. The inventory marks 
 | Checkout | GitHub checkout of the PR commit | Yes |
 | Setup Node | Node.js 22 (design choice; no `.nvmrc`) | Yes |
 | Install | `npm ci` | Yes |
-| Lint | gap — no `lint` script | No. Do not invent one. |
+| Lint | `npm run lint` (`node scripts/lint-ci.mjs`) | Yes |
 | Typecheck | `npm run typecheck` (`tsc --noEmit`) | Yes |
-| Test | gap — no `test` script | No. Do not invent one. |
+| Test | `npm run test` (`node --test tests/listing-schema.test.ts`) | Yes |
 | Public env for build | `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` set to `.env.example` placeholders | Yes, immediately before build |
 | Build | `npm run build` (`vite build`) | Yes |
 
 ## Failure policy
 
-- If checkout, Node setup, `npm ci`, `npm run typecheck`, or `npm run build` fails, the job fails. The pull request shows a red X.
+- If checkout, Node setup, `npm ci`, `npm run lint`, `npm run typecheck`, `npm run test`, or `npm run build` fails, the job fails. The pull request shows a red X.
 - Do not set `continue-on-error` on those stages.
-- Lint and test are not optional checks. They are absent. An absent script must not be wired up as a soft failure.
 - A person still decides whether to merge. CI only reports whether the required stages passed.
 
 ## Caching intent
@@ -79,7 +78,7 @@ Pain addressed, from `docs/ci/pr-pain-and-goals.md`:
 - No workflow runs when a pull request opens. The trigger is `pull_request` into `main`.
 - Install is a local chore. `npm ci` runs on the shared runner.
 - Teammates can skip typecheck and build. Both are required stages, in that order, after install.
-- Lint and test cannot be shared yet because the scripts do not exist. They stay gaps instead of fake commands.
+- Lint and test are shared commands: `npm run lint` and `npm run test`. They are not an ESLint sweep or a browser suite.
 - Reviewers should not re-run “does it install and build?” A red X answers that on the pull request.
 - A machine check is not a merge decision. That line stays in the failure policy and the out-of-scope list.
 
@@ -91,11 +90,10 @@ Inventory rows that drive the required stages:
 
 ## Open questions / gaps
 
-- [x] Lint is missing from `package.json`. Left out of the job until a `lint` script exists.
-- [x] Test is missing from `package.json`. Left out of the job until a `test` script exists. No database test suite is skipped or mocked, because none exists.
+- [x] `lint` and `test` exist. They call Node, not ESLint or Vitest. A browser end-to-end suite is still out of scope.
 - [ ] Node 22 is a design choice from `@types/node`, not from `.nvmrc` or `engines`. Change it in this doc before changing the workflow if the team pins a different version.
 - [ ] A clean `npm run build` with only the `.env.example` placeholders is not yet proven. If that build fails for a reason other than the two public names, fix the design before adding more env vars. Do not add the service-role key to get a green build.
 
 ## Sign-off for next step
 
-This design is the contract for `.github/workflows/pr-ci.yml`. The workflow may implement checkout, Node 22, `npm ci`, `npm run typecheck`, the two public placeholders, and `npm run build`. It may cache npm by `package-lock.json`. It must not add deploy, live Supabase writes, lint, test, or a merge step.
+This design is the contract for `.github/workflows/pr-ci.yml`. The workflow may implement checkout, Node 22, `npm ci`, `npm run lint`, `npm run typecheck`, `npm run test`, the two public placeholders, and `npm run build`. It may cache npm by `package-lock.json`. It must not add deploy, live Supabase writes, a browser suite, or a merge step.
