@@ -1,0 +1,27 @@
+# Scaffold only. Typecheck and build are added in a later step.
+# Node 22 and npm ci come from docs/ci/pipeline-design.md.
+# Do not add lint, test, deploy, or secrets in this file yet.
+
+name: PR CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
