@@ -130,3 +130,85 @@ From `docs/ci/e2e-verification-log.md` on 2026-11-22, branch `main` at commit `2
 ## 9. One-paragraph executive summary
 
 PREIshare pull requests into `main` now have a GitHub Actions job, `Quality checks`, that installs dependencies and then runs lint, typecheck, test, and the production build. Those five commands passed on a developer machine on 2026-11-22. They have not yet been watched on GitHub, and branch protection is not on, so a red check does not block merge until an admin requires `PR CI / Quality checks` and a human review. AI prompts can help a reviewer read a diff. They do not approve, and they do not prove login, listing security, or a production deploy.
+
+---
+
+## Topic 2: AI review overlay on the finished CI gate
+
+The topic 1 record above stays in force. Continuous integration is already done. The GitHub Actions workflow at `.github/workflows/pr-ci.yml` already installs, typechecks, builds, lints, and tests on pull requests. This section does not rebuild that workflow, the prompt pack, or the live site. It tells stakeholders how human review sits on top of that finished gate.
+
+### What the AI review can and cannot do
+
+The AI review can:
+
+- Suggest findings on a pull request, in the required output shape from the system instruction.
+- Help a human reviewer look faster. It is an advisor only.
+
+The AI review cannot approve a pull request, and it cannot merge a pull request. It also cannot:
+
+- Replace a human decision about sign-in, money, privacy, or product intent.
+- Count as a required GitHub status check or a required reviewer.
+
+A green CI check is evidence the commands passed. It is not permission to merge.
+
+### Where to read the overlay
+
+Do not look for a second handoff file. Start with the overview, then open the piece you need.
+
+| Piece | Path | What a stakeholder uses it for |
+| --- | --- | --- |
+| Overlay overview | `docs/ci/ai-review-overlay-brief.md` | Why this review layer exists |
+| Who may approve and who may merge | `docs/ci/pr-approval-roles.md` | Humans only; the AI is an advisor |
+| System instruction and output shape | `docs/ci/ai-pr-review-prompts.md` | How the AI must answer |
+| Human-judgment checklist | `docs/ci/human-judgment-checklist.md` | Sign-in, money, privacy, and product intent |
+| Review runbook | `docs/ci/ai-review-orchestration.md` | The same sequence every time |
+| Sample critique and prompt revision | `docs/ci/sample-pr-review/critique-and-prompt-revision.md` | What the practice review taught us |
+| Branch-protection record | `docs/ci/branch-protection-checklist.md` | What GitHub actually saved |
+| Practice sample | `docs/ci/samples/README.md` | The planted privacy sample; not app code |
+
+### Branch protection: enforced now versus only documented
+
+Copied from `docs/ci/branch-protection-checklist.md`. This handoff does not change GitHub settings.
+
+#### Enforced on this repository now
+
+- None. The enforcement record says Settings could not be opened. No intended rule was saved, so none is enforced.
+
+#### Documented but not enforced on this plan
+
+- Require a pull request before merging. Result in the checklist: blocked by missing admin.
+- One human approval before merge. The roles file names Alexis Terry as the human reviewer. The count used is 1 because that file gives no number. Result: blocked by missing admin.
+- Status check `PR CI / Quality checks` from `.github/workflows/pr-ci.yml`. Result: blocked by missing admin. No new workflow was added.
+- Limiting merge to Alexis Terry, the maintainer. The checklist says this could not be set.
+
+The AI assistant is not a required approver and is not a required status check.
+
+### Sample privacy pull request
+
+The practice pull request with one planted privacy mistake was not merged. It is still open at https://github.com/aterry04/PREIShare-org-repo/pull/1. The practice files stay under `docs/ci/samples/` for learning. They are not live member-facing code. Sprint 7 must not merge that sample.
+
+### Decision log: why humans remain the approvers
+
+Approval and merge stay with the humans named in `docs/ci/pr-approval-roles.md`. Alexis Terry approves, then Alexis Terry merges. A passing CI run cannot judge these four risks. The AI may comment. A person must decide.
+
+| Risk | Why a human must decide | Artifact that supports the person |
+| --- | --- | --- |
+| Sign-in | A change can pass lint, typecheck, test, and build and still let the wrong person into the dashboard, or keep the right person out. | Roles file and human-judgment checklist |
+| Money | Dues, payments, and balances are amounts a person must accept. An AI comment must not accept them. | Human-judgment checklist |
+| Privacy | The practice review planted a privacy mistake on purpose. A person judged the advisor notes with the checklist, recorded in the critique. The sample was not merged. | Checklist and critique file |
+| Product intent | A change can be technically fine and still fail to match what PREIshare is for: turning property and market data into something people can use when deciding where to live, buy, or invest. | Overlay brief and checklist |
+
+### Sprint 7 next actions
+
+These items are already done and working. Do not list them as missing, unbuilt, or work to create.
+
+- The pull-request CI workflow is done and running. Do not rebuild `.github/workflows/pr-ci.yml`.
+- The AI review prompt pack, which is the system instruction, is done. Do not treat `docs/ci/ai-pr-review-prompts.md` as unwritten.
+- The existing Production site is already live on the current Vercel Hobby project at https://prei-share-org-repo-woad.vercel.app/. Do not create a new hosting project. Later confirmation uses that same public URL.
+- Keep merge decisions with the humans named in the roles file. The AI remains an advisor.
+- On future pull requests, follow the runbook and the human checklist.
+- If the GitHub plan later allows a rule that is only documented today, apply it from the branch-protection checklist. Until then, leave that honest gap recorded. The gap does not mean CI was never built.
+
+### What stakeholders should remember
+
+The automatic checks stay evidence that the commands passed. The person who approves is still a person. The sample privacy change was not merged.
