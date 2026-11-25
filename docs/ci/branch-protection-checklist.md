@@ -53,3 +53,37 @@ A newer push to the same pull request cancels the older run (`cancel-in-progress
 ## Notes for Sprint 6 handoff
 
 A red required check should block merge. A green check means install, lint, typecheck, test, and build passed on the latest commit. It does not mean product review is done.
+
+## Enforcement record
+
+This section was added after the existing checklist. The sections above stay in this file. They describe the rules we intended. This section records what GitHub actually saved. Branch protection is a GitHub website setting, not code. Writing this file does not turn a rule on. A rule that did not save is not enforced. Do not describe it as on.
+
+- Date: 2026-11-24
+- GitHub user who tried: aterry04
+- Repository visibility seen on the repo page: public
+- Could open Settings and change rules: no, Settings was missing. The signed-out repository page had no Settings tab, and the branches settings address returned Page not found.
+- Screen used: could not open either
+- Branch name pattern: main
+- Paid upgrade: No paid GitHub upgrade was purchased.
+
+### Intended rules versus what saved
+
+Approver role from docs/ci/pr-approval-roles.md: Human reviewer, Alexis Terry. Merger role from that file: Maintainer, Alexis Terry. That file does not give a number, so the approval count used here is 1, the default, because this gate needs at least one human approval. The AI assistant is not an approver.
+
+- Require a pull request before merging. Wanted: yes. Result: blocked by missing admin. What I saw after refresh: no Settings screen, and no saved rule listed. This rule is not enforced.
+- Human approvals before merge. Count and approver roles from docs/ci/pr-approval-roles.md: count 1, defaulted because the roles file has no number; approver is Alexis Terry, the human reviewer. Count is at least 1. The AI assistant is not an approver. Result: blocked by missing admin. What I saw after refresh: no approval rule listed. This rule is not enforced.
+- Required status check from the existing workflow .github/workflows/pr-ci.yml. Exact check name searched: PR CI / Quality checks. It was not listed, because the settings screen did not open. No new workflow was added. Result: blocked by missing admin. What I saw after refresh: that check was not selected. This rule is not enforced.
+- Who may merge, from docs/ci/pr-approval-roles.md: Alexis Terry, the maintainer. Did GitHub limit merge to those people? could not set. This limit is not enforced by GitHub.
+- Bypass list: not shown.
+
+### Gaps
+
+- Require a pull request before merging is not enforced. Settings could not be opened, so nothing was saved.
+- Human approvals before merge are not enforced. The same missing Settings screen blocked the approval count.
+- The status check PR CI / Quality checks is not enforced. The name was searched for in the existing workflow only. The settings list never appeared.
+- Limiting merge to Alexis Terry was not shown, so that limit is not enforced.
+- No ruleset was left Active. No price or trial screen appeared.
+
+### What humans still do
+
+People still follow docs/ci/human-judgment-checklist.md and docs/ci/ai-review-orchestration.md before merge, including when GitHub did not save the rule. The sample review in docs/ci/sample-pr-review/critique-and-prompt-revision.md is advice only and is not a required status check. The AI assistant does not approve or merge. The existing pr-ci workflow remains the only automated check this record tried to require.
