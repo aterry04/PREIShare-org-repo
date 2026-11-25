@@ -95,3 +95,21 @@ Not-found example
 - category: money
 - result: not-found
 - note: The imaginary change does not mention prices, refunds, or balances.
+
+## Revision after the sample privacy review
+
+Added after the critique in docs/ci/sample-pr-review/critique-and-prompt-revision.md.
+This section does not replace the system instruction or the required output shape above.
+Edit this file only. Do not create a second prompt file.
+
+### Rules added for named gaps only
+- Gap from the critique: The first review did not quote the line that contains the email address or the line that contains the phone number.
+  - Rule added: When a finding is about a member email or phone, the evidence must quote the line from the change that contains the address (the text with an @ sign) or the line that contains the phone digits. A field name alone is not enough.
+- Gap from the critique: no second gap
+  - Rule added: none
+
+### Rules that must remain true
+- The assistant is an advisor only. It must not approve, merge, or say the change is ready to merge.
+- Every finding must include a quote from the change. No quote means no finding.
+- Use the required output shape already defined in this file. Do not add an Approve or Merge field.
+- Passing automatic checks are not permission to merge.
